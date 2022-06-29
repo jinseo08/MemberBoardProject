@@ -1,5 +1,6 @@
 package com.its.memberboardproject.entity;
 
+import com.its.memberboardproject.dto.MemberDTO;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +31,15 @@ public class MemberEntity {
     @Column(length = 20)
     private String memberMobile;
 
+    public static MemberEntity toSave(MemberDTO memberDTO){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberMobile(memberDTO.getMemberMobile());
+        memberEntity.setMemberProfileName(memberDTO.getMemberProfileName());
+        return memberEntity;
+    }
 
 
 }

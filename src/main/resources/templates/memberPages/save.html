@@ -5,6 +5,18 @@
     <title>Save</title>
 </head>
 <body>
-회원가입 페이지
+<form action="/member/save" method="post" enctype="multipart/form-data">
+    <p>이메일</p>
+    <input type="text" name="memberEmail">
+    <p>비밀번호</p>
+    <input type="password" name="memberPassword">
+    <p>이름</p>
+    <input type="text" name="memberName">
+    <p>전화번호</p>
+    <input type="text" name="memberMobile">
+    <p>프로필사진</p>
+    <input type="file" name="memberProfile"><br><br>
+    <input type="submit" value="회원가입">
+</form>
 </body>
 </html>
