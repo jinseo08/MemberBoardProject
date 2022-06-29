@@ -5,10 +5,7 @@ import com.its.memberboardproject.service.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -68,6 +65,12 @@ public class MemberController {
     @GetMapping("/mypage")
     public String mypage(){
         return "/memberPages/mypage";
+    }
+
+    @PostMapping("/emailCheck")
+    public @ResponseBody String emailCk(@RequestParam String memberEmail){
+        String checkResult = memberService.emailCk(memberEmail);
+        return checkResult;
     }
 
 }

@@ -42,4 +42,13 @@ public class MemberService {
         }
         return null;
     }
+
+    public String emailCk(String memberEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberEmail);
+        if(optionalMemberEntity.isEmpty()){
+            return "ok";
+        }else {
+            return "no";
+        }
+    }
 }
