@@ -1,23 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Mypage</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <th:block th:replace="layout/header :: header"></th:block>
-<form action="/member/update" method="post" enctype="multipart/form-data">
+<form action="/member/update" method="post" enctype="multipart/form-data" name="updateForm">
     <input type="hidden" name="id" th:value="${member.id}">
     <p>이메일</p>
     <input type="text" name="memberEmail" th:value="${member.memberEmail}" readonly>
     <p>비밀번호</p>
-    <input type="password" name="memberPassword">
+    <input type="password" id="memberPassword" name="memberPassword">
     <p>이름</p>
     <input type="text" name="memberName" th:value="${member.memberName}">
     <p>전화번호</p>
     <input type="text" name="memberMobile" th:value="${member.memberMobile}">
     <p>프로필사진</p>
-    <td><img th:src="@{|/upload/${member.memberProfileName}|}" width="300" height="300" alt=""></td>
+    <img th:src="@{|/upload/${member.memberProfileName}|}" width="100" height="100" alt="">
+    <input type="button" onclick="update()" value="정보수정">
 </form>
 </body>
+<script th:inline="javascript">
+    const update = () => {
+        const pw = [[${member.memberPassword}]];
+        const pwConfirm = document.getElementById("memberPassword").value;
+        if (pw == pwConfirm) {
+            alert("수정완료")
+            updateForm.submit();
+        } else {
+            alert("비밀번호가 틀립니다!!");
+        }
+    }
+</script>
 </html>

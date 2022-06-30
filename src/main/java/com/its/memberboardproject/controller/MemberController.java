@@ -77,4 +77,11 @@ public class MemberController {
         return checkResult;
     }
 
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        System.out.println("memberDTO = " + memberDTO);
+        memberService.update(memberDTO);
+        return "redirect:/member/detail/"+memberDTO.getId();
+    }
+
 }
