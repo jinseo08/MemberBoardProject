@@ -6,5 +6,18 @@
 </head>
 <body>
 <th:block th:replace="layout/header :: header"></th:block>
+<form action="/member/update" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${member.id}">
+    <p>이메일</p>
+    <input type="text" name="memberEmail" th:value="${member.memberEmail}" readonly>
+    <p>비밀번호</p>
+    <input type="password" name="memberPassword">
+    <p>이름</p>
+    <input type="text" name="memberName" th:value="${member.memberName}">
+    <p>전화번호</p>
+    <input type="text" name="memberMobile" th:value="${member.memberMobile}">
+    <p>프로필사진</p>
+    <td><img th:src="@{|/upload/${member.memberProfileName}|}" width="300" height="300" alt=""></td>
+</form>
 </body>
 </html>

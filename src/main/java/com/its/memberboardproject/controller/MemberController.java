@@ -5,6 +5,7 @@ import com.its.memberboardproject.service.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -62,10 +63,13 @@ public class MemberController {
         return "/memberPages/list";
     }
 
-    @GetMapping("/mypage")
-    public String mypage(){
+    @GetMapping("/detail/{id}")
+    public String findById(@PathVariable Long id, Model model){
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member",memberDTO);
         return "/memberPages/mypage";
     }
+
 
     @PostMapping("/emailCheck")
     public @ResponseBody String emailCk(@RequestParam String memberEmail){

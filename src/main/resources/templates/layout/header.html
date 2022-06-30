@@ -13,10 +13,10 @@
             </div>
             <div>
                 <a href="/member/logout">로그아웃</a>
-                <a href="/member/mypage">마이페이지</a>
+                <a th:href="@{|/member/detail/${session.loginId}|}">마이페이지</a>
                 <br><br>
-                로그인 이메일 :<p th:text="${session.loginEmail}"></p>
-                로그인 아이디: <p th:text="${session.loginId}"></p>
+                로그인 이메일 :<span th:text="${session.loginEmail}"></span><br>
+                로그인 아이디: <span th:text="${session.loginId}"></span>
             </div>
         </div>
         <div th:unless="${session.loginEmail}">
