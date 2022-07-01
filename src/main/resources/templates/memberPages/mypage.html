@@ -19,7 +19,13 @@
     <input type="text" name="memberMobile" th:value="${member.memberMobile}">
     <p>프로필사진</p>
     <img th:src="@{|/upload/${member.memberProfileName}|}" width="100" height="100" alt="">
-    <input type="button" onclick="update()" value="정보수정">
+<!--  본인의 마이페이지만 수정 가능하고 관리자는 강제탈퇴만 시킬 수 있음  -->
+    <div th:if="${session.loginEmail}==${session.loginEmail}!=${session.loginEmail.toString().equals('admin')}">
+        <input type="button" onclick="update()" value="정보수정">
+    </div>
+    <div th:if="${session.loginEmail.toString().equals('admin')}">
+        <a href="#">강제탈퇴</a>
+    </div>
 </form>
 </body>
 <script th:inline="javascript">
