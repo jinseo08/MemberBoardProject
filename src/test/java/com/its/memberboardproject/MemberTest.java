@@ -35,4 +35,23 @@ public class MemberTest {
         assertThat(newMember(1).getMemberEmail()).isEqualTo(memberDTO.getMemberEmail());
     }
 
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    @DisplayName("로그인 테스트")
+    public void loginTest(){
+        final String memberEmail ="로그인용이메일";
+        final String memberPassword = "로그인용비밀번호";
+        String memberName = "로그인용 이름";
+        String memberMobile = "로그인용 전화번호";
+        String memberProfileName = "로그인용 파일";
+        MemberDTO memberDTO = new MemberDTO(memberEmail, memberPassword, memberName, memberMobile, memberProfileName);
+        Long saveId = memberService.saveTest(memberDTO);
+        MemberDTO loginMemberDTO = new MemberDTO();
+        loginMemberDTO.setMemberEmail(memberEmail);
+        loginMemberDTO.setMemberPassword(memberPassword);
+        MemberDTO loginResult = memberService.login(loginMemberDTO);
+        assertThat(loginResult).isNotNull();
+    }
+
 }
