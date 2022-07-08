@@ -54,4 +54,14 @@ public class MemberTest {
         assertThat(loginResult).isNotNull();
     }
 
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    @DisplayName("회원 삭제 테스트")
+    public void memberDeleteTest(){
+        Long id = memberService.saveTest(newMember(100));
+        memberService.deleteById(id);
+        assertThat(memberService.findById(id)).isNull();
+    }
+
 }
