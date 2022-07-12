@@ -16,7 +16,7 @@ public class BoardController {
     //글 작성 화면 이동
     @GetMapping("/save-form")
     public String saveForm() {
-        return "/boardPages/saveForm";
+        return "/boardPages/save";
     }
     //글 작성 처리
     @PostMapping("/save")
