@@ -52,5 +52,28 @@ public class BoardController {
         return "boardPages/detail";
     }
 
+    //글 삭제
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id){
+        boardService.deleteById(id);
+        return "redirect:/board";
+    }
+    //글 수정화면 요청
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable Long id, Model model){
+        BoardDTO boardDTO = boardService.findById(id);
+        System.out.println("boardDTO = " + boardDTO);
+        model.addAttribute("board", boardDTO);
+        return "boardPages/update";
+    }
+    //수정 처리
+    @PostMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO){
+        boardService.update(boardDTO);
+        System.out.println("BoardController.update");
+        System.out.println("boardDTO = " + boardDTO);
+        return "redirect:/board/"+boardDTO.getId();
+    }
+
 
 }
