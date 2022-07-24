@@ -45,4 +45,49 @@ public class BoardService {
         }
     }
 
+    public Page<BoardDTO> paging(Pageable pageable) {
+        int page = pageable.getPageNumber();
+        page = (page == 1)? 0: (page-1);
+        Page<BoardEntity> boardEntities = boardRepository.findAll(PageRequest.of(page, PagingConst.PAGE_LIMIT, Sort.by(Sort.Direction.DESC, "id")));
+        Page<BoardDTO> boardList = boardEntities.map(
+                board -> new BoardDTO(board.getId(),
+                        board.getBoardTitle(),
+                        board.getBoardWriter(),
+                        board.getBoardContents(),
+                        board.getBoardHits(),
+                        board.getCreatedTime(),
+                        board.getUpdatedTime(),
+                        board.getBoardFileName()
+                ));
+        return boardList;
+    }
+
+    @Transactional
+    public BoardDTO findById(Long id) {
+        boardRepository.boardHits(id);
+        Optional<BoardEntity>optionalBoardEntity = boardRepository.findById(id);
+        if(optionalBoardEntity.isPresent()){
+            return BoardDTO.toBoardDTO(optionalBoardEntity.get());
+        }else {
+            return null;
+        }
+    }
+    public void deleteById(Long id) {
+        boardRepository.deleteById(id);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.save(BoardEntity.toUpdateEntity(boardDTO));
+    }
+
+    @Transactional
+    public List<BoardDTO> search(String q) {
+        List<BoardEntity> boardEntityList = boardRepository.findByBoardTitleContainingOrBoardContentsContaining(q, q);
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        for(BoardEntity boardEntity: boardEntityList){
+            boardDTOList.add(BoardDTO.toBoardDTO(boardEntity));
+        }
+        return boardDTOList;
+    }
+
 }
