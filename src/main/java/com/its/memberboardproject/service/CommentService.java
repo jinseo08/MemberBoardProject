@@ -1,4 +1,50 @@
 package com.its.memberboardproject.service;
 
+@Service
+@RequiredArgsConstructor
 public class CommentService {
+    private final CommentRepository commentRepository;
+    private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
+
+    public List<CommentDTO> findAll(Long id) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+        List<CommentDTO> commentDTOList = new ArrayList<>();
+        if (optionalBoardEntity.isPresent()) {
+            BoardEntity boardEntity = optionalBoardEntity.get();
+            List<CommentEntity> commentEntityList = boardEntity.getCommentEntityList();
+            for (CommentEntity commentEntity : commentEntityList) {
+                commentDTOList.add(CommentDTO.toSaveDTO(commentEntity));
+            }
+        }
+        return commentDTOList;
+    }
+
+    public void save(CommentDTO commentDTO) {
+        System.out.println("CommentService.save");
+
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(commentDTO.getCommentWriter());
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(commentDTO.getBoardId());
+
+        if (optionalBoardEntity.isPresent() && optionalMemberEntity.isPresent()) {
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            BoardEntity boardEntity = optionalBoardEntity.get();
+            CommentEntity commentEntity = CommentEntity.toSaveEntity(commentDTO, boardEntity, memberEntity);
+            commentRepository.save(commentEntity);
+        }
+    }
+
+    public void delete(Long id) {
+        commentRepository.deleteById(id);
+    }
+
+    public CommentDTO findById(Long id) {
+        Optional<CommentEntity> optionalCommentEntity = commentRepository.findById(id);
+        if (optionalCommentEntity.isPresent()) {
+            CommentEntity commentEntity = optionalCommentEntity.get();
+            return CommentDTO.toSaveDTO(commentEntity);
+        } else {
+            return null;
+        }
+    }
 }
