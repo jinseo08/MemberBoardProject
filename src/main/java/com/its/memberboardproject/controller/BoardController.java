@@ -1,6 +1,7 @@
 package com.its.memberboardproject.controller;
 
 import com.its.memberboardproject.dto.BoardDTO;
+import com.its.memberboardproject.dto.CommentDTO;
 import com.its.memberboardproject.service.BoardService;
 import com.its.memberboardproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
