@@ -1,5 +1,12 @@
 package com.its.memberboardproject.service;
 
+import com.its.memberboardproject.dto.CommentDTO;
+import com.its.memberboardproject.repository.BoardRepository;
+import com.its.memberboardproject.repository.CommentRepository;
+import com.its.memberboardproject.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
