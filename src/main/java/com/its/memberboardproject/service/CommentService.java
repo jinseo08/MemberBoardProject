@@ -1,11 +1,18 @@
 package com.its.memberboardproject.service;
 
 import com.its.memberboardproject.dto.CommentDTO;
+import com.its.memberboardproject.entity.BoardEntity;
+import com.its.memberboardproject.entity.CommentEntity;
+import com.its.memberboardproject.entity.MemberEntity;
 import com.its.memberboardproject.repository.BoardRepository;
 import com.its.memberboardproject.repository.CommentRepository;
 import com.its.memberboardproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
