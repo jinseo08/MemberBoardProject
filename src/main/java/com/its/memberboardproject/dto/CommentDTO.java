@@ -1,5 +1,9 @@
 package com.its.memberboardproject.dto;
 
+import com.its.memberboardproject.entity.CommentEntity;
+
+import java.time.LocalDateTime;
+
 public class CommentDTO {
     private Long id;
     private Long boardId;

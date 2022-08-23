@@ -1,5 +1,6 @@
 package com.its.memberboardproject.dto;
 
+import com.its.memberboardproject.entity.BoardEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
