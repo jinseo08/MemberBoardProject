@@ -3,6 +3,7 @@ package com.its.memberboardproject.controller;
 import com.its.memberboardproject.dto.BoardDTO;
 import com.its.memberboardproject.dto.CommentDTO;
 import com.its.memberboardproject.service.BoardService;
+import com.its.memberboardproject.service.CommentService;
 import com.its.memberboardproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final CommentService commentService;
 
     //글 작성 화면 이동
     @GetMapping("/save-form")
