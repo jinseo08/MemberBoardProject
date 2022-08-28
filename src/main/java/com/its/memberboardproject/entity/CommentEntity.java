@@ -1,9 +1,8 @@
 package com.its.memberboardproject.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.its.memberboardproject.dto.CommentDTO;
+
+import javax.persistence.*;
 
 public class CommentEntity {
     @Id
