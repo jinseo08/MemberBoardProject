@@ -4,7 +4,7 @@ import com.its.memberboardproject.dto.CommentDTO;
 
 import javax.persistence.*;
 
-public class CommentEntity {
+public class CommentEntity extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
